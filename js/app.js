@@ -14,6 +14,9 @@ app.config(function($routeProvider){
         when('/my-earnings', {
           templateUrl: 'earnings.html',
           controller  : 'EarningsController'
+        })
+        .otherwise({
+          redirectTo : "/"
         });
 });
 
