@@ -1,1 +1,26 @@
-<p>new meal</p>
+<div class="meal-details">
+  <h2>Enter the Meal Details</h2>
+  <hr>
+  <form name="mealDetails" ng-submit="submit();submitted=true;" novalidate>
+    <label for="base"><b>Base Meal Price($):</b>  </label>
+    <input type="number" min="0" id="base" ng-model="data.basePrice" required placeholder="0.0"><br>
+    <div class="spacer"></div>
+    <label for="tax"><b>Tax Rate(%):</b> </label>
+    <input type="number" min="0" id="tax" ng-model="data.taxRate" required placeholder="0.0"><br>
+    <div class="spacer"></div>
+    <label for="tip"><b>Tip Percentage(%):</b> </label>
+    <input type="number" min="0" id="tip" ng-model="data.tipPercentage" required placeholder="0.0"><br>
+    <div class="spacer"></div>
+    <button class="btn btn-large btn-success" ng-class="{'disabled':mealDetails.$invalid}">Submit</button>
+    <button class="btn btn-large btn-danger" ng-click="cancel()">Cancel</button>
+  </form>
+</div>
+
+<div class="cus-charges">
+  <h2>Customer Charges</h2>
+  <hr>
+  <p><b>Subtotal</b> {{data.subTotal}}</p>
+  <p><b>Tip</b> {{data.tip}}</p>
+  <hr>
+  <p><b>Total</b> {{data.total}}</p>
+</div>
