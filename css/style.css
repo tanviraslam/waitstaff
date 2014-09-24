@@ -73,3 +73,46 @@ h2{
 .cus-charges p, .earnings-info p{
   margin-left: 15px;
 }
+
+/*Animations*/
+.loading {
+  position:relative;
+  height:100%;
+}
+
+.loading:before {
+  position:absolute;
+  content:"";
+  left:0;
+  bottom:0;
+  right:0;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,0.9) no-repeat center center;
+  background-image: url('../img/loading-animation.gif');
+}
+
+.animate-view.ng-enter, .animate-view.ng-leave{
+  transition: 0.75s linear all;
+  -webkit-transition: 0.75.5s linear all;
+}
+
+.animate-view.ng-enter{
+  opacity: 0;
+}
+
+.animate-view.ng-enter{
+  opacity: 1;
+}
+
+.animate-view.ng-leave{
+  opacity: 1;
+}
+
+.animate-view.ng-leave-active{
+  opacity: 0;
+}
+
+
+
+

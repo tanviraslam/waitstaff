@@ -1,4 +1,4 @@
-var app = angular.module('app',['ngRoute']);
+var app = angular.module('app',['ngRoute', 'ngAnimate']);
 
 //Routes
 app.config(function($routeProvider){
@@ -14,10 +14,24 @@ app.config(function($routeProvider){
         when('/my-earnings', {
           templateUrl: 'earnings.html',
           controller  : 'EarningsController'
-        })
-        .otherwise({
-          redirectTo : "/"
         });
+});
+
+//Run method
+app.run(function($rootScope, $location, $timeout){
+  $rootScope.$on('$routeChangeError', function(){
+    $location.$on('/');
+  });
+
+  $rootScope.$on('$routeChangeStart', function(){
+    $rootScope.isLoading = true;
+  });
+
+  $rootScope.$on('$routeChangeSuccess', function(){
+    $timeout(function(){
+      $rootScope.isLoading = false;
+    }, 1000);
+  });
 });
 
 //services
@@ -75,18 +89,6 @@ app
     console.log(MealService.getData());
   };
 
-  // $scope.data = {
-  //    basePrice : 0.0,
-  //    taxRate : 0.0,
-  //    tipPercentage : 0.0,
-  //    subTotal : 0.0,
-  //    tip : 0.0,
-  //    total : 0.0,
-  //    tipTotal : 0.0,
-  //    mealCount : 0.0,
-  //    avgTip : 0.0
-  // };
-
   $scope.cancel = function(){
     $scope.data.basePrice = 0.0;
     $scope.data.taxRate = 0.0;
@@ -96,7 +98,6 @@ app
 })
 .controller('EarningsController', function($scope, MealService){
   $scope.data = MealService.getData();
-  console.log($scope.data);
   $scope.reset = function(){
     $scope.data.tipTotal = 0.0;
     $scope.data.mealCount = 0.0;
